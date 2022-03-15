@@ -1,23 +1,29 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native'; 
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native'; 
 
 class App extends Component{
   constructor(props){
     super(props);
     this.state = {
-      name: ''
+      name: '',
+      input:''
     };
-
-    this.captureName = this.captureName.bind(this);
+    this.entrar = this.entrar.bind(this)
+    //this.captureName = this.captureName.bind(this);
   }
-
-  captureName(text){
+  /*  captureName(text){
     if(text.length > 0){
       this.setState({name: 'Welcome to: ' + text});
     }else{
       this.setState({name: ''})
+    }*/
+  entrar(){
+    if(this.state.input ===''){
+      alert('Write your name')
+      return;
     }
-  }
+    this.setState({name: 'Welcome ' + this.state.input})
+  } 
 
   render(){
     return(
@@ -25,17 +31,21 @@ class App extends Component{
 
         <TextInput
         style={styles.input}
-        placeholder="Digite seu nome?"
+        placeholder="Write your name"
         underlineColorAndroid="transparent"
-        onChangeText={this.captureName}
+        onChangeText={ (text) => this.setState({input:text})}
+        //onChangeText={this.captureName}
         />
+
+        <Button title="Entrar" onPress={this.entrar} />
 
         <Text style={styles.texto}>{this.state.name}</Text>
 
       </View>
     );
+    }
   }
-}
+
 
 const styles = StyleSheet.create({
   container:{
